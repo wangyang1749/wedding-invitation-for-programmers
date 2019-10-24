@@ -1,12 +1,12 @@
 <template>
   <div class="executions">
     <!--执行命令-->
-    <p class="code" v-for="(execution, index) in executions" :key="index" v-show="execution.visible">
+    <!-- <p class="code" v-for="(execution, index) in executions" :key="index" v-show="execution.visible">
       <span class="addon">~</span>
       [<span class="time">{{ execution.time }}</span>]
       <span class="task">{{ execution.name }}</span>
       <span class="duration" v-if="execution.duration!==undefined">{{ execution.duration }} ms</span>
-    </p>
+    </p> -->
     <!--进度条-->
     <p class="code" v-show="isProcessed">
       <span class="addon">~</span>
@@ -14,11 +14,11 @@
       <span class="percentage">{{ percentage }}%</span>
     </p>
     <!--执行命令-->
-    <p class="code" v-show="endExecution.visible">
+    <!-- <p class="code" v-show="endExecution.visible">
       <span class="addon">~</span>
       [<span class="time">{{ endExecution.time }}</span>]
       <span class="task">{{ endExecution.name }}</span>
-    </p>
+    </p> -->
   </div>
 </template>
 
@@ -34,7 +34,7 @@
         isFinished: false,
         progressBarText: '--------------------------',
         endExecution: {
-          name:'打开中...',
+          name:'',
           time: '',
           visible: false
         }
@@ -64,14 +64,14 @@
           await this.progressivelyRun(execution)
         }
         // 执行完命令，开始显示进度条
-        await this.successProcessing(1000)
+        // await this.successProcessing(1000)
         // 执行最后一条命令
         await this.progressivelyRun(this.endExecution)
           .then(() => {
             setTimeout(() => {
               this.isFinished = true
               this.$emit('onFinish')
-            }, 500)
+            }, 300)
           })
       },
       // 执行一条命令

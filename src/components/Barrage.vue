@@ -41,6 +41,12 @@
           this.barrageAnimationStart()
         }
       }
+    },created(){
+      this.$axios.get("http://47.93.201.74:8683/wish/list")
+          .then((resp)=>{
+            this.barrages=resp.data
+            console.log(resp)
+          })
     },
     methods: {
       // 弹幕动画开始

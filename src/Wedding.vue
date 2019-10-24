@@ -12,7 +12,14 @@
     components: {
       Editor
     },
-    name: 'Wedding'
+    name: 'Wedding',
+    created(){
+      var audio= new Audio("01.mp3");
+      document.body.addEventListener('mousedown', function(){
+       audio.play();
+      }, false);
+    }
+    
   }
 
 </script>

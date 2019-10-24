@@ -5,13 +5,15 @@
         <div class="cover-content" :class="{'invitation-up':isOpening}">
           <div class="content-inside">
             <img class="content-inside-photo" src="../images/photo.jpg">
-            <p>我们结婚啦！</p>
-            <p><b>Jun & undefined</b></p>
-            <p>时间：invalid date value</p>
-            <p>地点：<b>location can not be found</b></p>
+            <p>崔行：你好</p>
+            <p>我想对你说</p>
+            <p>虽然现在我可能不是你所喜欢的人</p>
+            <p>但是我好想做一件事</p>
+            <p>那就是</p>
+            <p>请你去看电影</p>
             <input
               class="content-inside-input"
-              placeholder="轻触写下祝福，按回车发送" 
+              placeholder="点击这里回复..." 
               @keyup.enter="sendBarrage"
               @focus="isFocused = true"
               @blur="isFocused = false, hasEntered = false"
@@ -30,6 +32,7 @@
 </template>
 
 <script>
+import qs from 'qs';
 export default {
   props: ['canOpen'],
   data() {
@@ -57,6 +60,13 @@ export default {
         setTimeout(() => {
           this.$emit('sendBarrage', this.wish)
         }, 660)
+        // alert(this.wish)
+        this.$axios.post("http://47.93.201.74:8683/wish/add",qs.stringify({message:this.wish}))
+            .then((resp)=>{
+              console.log(resp);
+            }).catch((error)=>{
+              console.log(error);
+            })
       })
     }
   }
